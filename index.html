@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fbfaf7">
+  <title>向前一点 · 学习计划</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#today" aria-label="向前一点首页"><span class="brand-symbol">↗</span><span>向前一点<small>STUDY, GENTLY</small></span></a>
+      <nav class="primary-nav" aria-label="主导航">
+        <button class="nav-link active" data-view="today"><span class="nav-glyph">◷</span>今日</button>
+        <button class="nav-link" data-view="plan"><span class="nav-glyph">▤</span>计划</button>
+        <button class="nav-link" data-view="focus"><span class="nav-glyph">◉</span>专注</button>
+        <button class="nav-link" data-view="review"><span class="nav-glyph">↗</span>复盘</button>
+      </nav>
+      <div class="sidebar-bottom"><div class="quote-mark">“</div><p>慢一点也没关系，<br>重要的是继续向前。</p><span>给今天的你</span></div>
+      <div class="local-note"><span class="local-dot"></span>数据仅保存在此浏览器</div>
+    </aside>
+    <main class="main-area">
+      <header class="topbar"><div><span class="eyebrow" id="topDate"></span><h1 id="viewHeading">今天，向前一点</h1></div><button class="avatar" aria-label="本地使用">你</button></header>
+      <div class="content">
+        <section class="view active-view" id="todayView">
+          <div class="welcome-row"><div><p class="lede" id="greeting">一步一步来，今天也能有所收获。</p><p class="subtle" id="todayLabel"></p></div></div>
+          <div class="summary-grid">
+            <article class="summary-card warm"><div class="summary-icon">✳</div><div><span>今日计划</span><strong id="plannedSummary">0 分钟</strong><small>计划学习时长</small></div></article>
+            <article class="summary-card green"><div class="summary-icon">◷</div><div><span>实际专注</span><strong id="actualSummary">0 分钟</strong><small id="focusCountSummary">还没有专注记录</small></div></article>
+            <article class="summary-card blue"><div class="summary-icon">✓</div><div><span>任务进度</span><strong id="taskSummary">0 / 0</strong><small>完成今日任务</small></div></article>
+          </div>
+          <div class="today-layout">
+            <section class="panel task-panel"><div class="panel-heading"><div><span class="eyebrow">YOUR DAY · 按轻重缓急整理</span><h2>今日任务</h2></div><button class="button button-soft" data-action="new-task">＋ 添加任务</button></div><div id="todayTasks" class="task-list"></div></section>
+            <aside class="daily-side"><section class="panel plan-time"><div class="panel-heading"><div><span class="eyebrow">TIME INTENTION</span><h2>给学习留点时间</h2></div></div><label for="dailyPlanHours">今天计划学习</label><div class="time-input"><input id="dailyPlanHours" type="number" min="0" max="24" step="0.5" inputmode="decimal"><span>小时</span></div><button class="button button-soft full-width" data-view-link="focus">开始一段专注 <span>→</span></button></section>
+              <section class="encouragement" id="encouragement"><span class="encouragement-icon">✦</span><p>不用一下子做完所有事。<br>先挑一件开始吧。</p></section>
+              <button class="review-shortcut" data-view-link="review"><span class="review-icon">✎</span><span><strong>写下今日复盘</strong><small>给今天一个温柔的收尾</small></span><span class="arrow">→</span></button>
+            </aside>
+          </div>
+        </section>
+
+        <section class="view" id="planView">
+          <div class="page-intro"><div><span class="eyebrow">MAKE IT MANAGEABLE</span><h2>把远方，拆成今天</h2><p>从长期目标开始，拆成下一步可以行动的小事。</p></div><button class="button button-primary" data-action="new-goal">＋ <span>新建目标</span></button></div>
+          <section class="panel goal-section"><div class="panel-heading"><div><span class="eyebrow">YOUR GOALS</span><h2>目标拆解</h2></div></div><div id="goalsTree" class="goals-tree"></div></section>
+          <section class="panel matrix-section"><div class="panel-heading matrix-heading"><div><span class="eyebrow">PRIORITIZE GENTLY</span><h2>轻重缓急</h2></div><div class="matrix-mobile-tabs" id="matrixTabs"></div></div><div class="matrix-grid" id="matrixGrid"></div></section>
+        </section>
+
+        <section class="view" id="focusView">
+          <div class="page-intro focus-intro"><div><span class="eyebrow">A LITTLE FOCUS</span><h2>给这一刻一点专注</h2><p>手机放远一点，先专心做眼前这一件事。</p></div></div>
+          <div class="focus-layout"><section class="panel timer-panel"><label class="field-label" for="focusTask">这段时间想做什么？</label><select id="focusTask"><option value="">自由专注</option></select><div class="timer-ring"><div class="timer-content"><span id="timerMode">专注时间</span><strong id="timerDisplay">25:00</strong><small id="timerStatus">准备好了就开始</small></div></div><div class="timer-controls"><button class="button button-primary timer-start" id="timerToggle">开始专注</button><button class="button button-quiet" id="timerReset" aria-label="重置计时器">重置</button></div><button class="button button-soft timer-save" id="timerSave" style="display:flex;margin:10px auto 0">结束并记录</button><div class="timer-length"><button data-minutes="25" class="length-choice selected">25 分钟</button><button data-minutes="45" class="length-choice">45 分钟</button><button data-minutes="60" class="length-choice">60 分钟</button></div></section>
+            <aside class="focus-aside"><section class="phone-prompt"><span class="phone-icon">⌁</span><span class="eyebrow">A SMALL REMINDER</span><h3>手机先放一边</h3><p>把手机翻面或放到伸手够不到的地方。网页无法锁定其他应用，但你可以为自己留出这段安静。</p></section><section class="panel break-panel"><div class="panel-heading"><div><span class="eyebrow">REST IS PART OF IT</span><h2>休息提醒</h2></div></div><label class="toggle-row"><span><strong>专注结束后提醒休息</strong><small>休息一下，再继续也很好</small></span><input id="breakReminder" type="checkbox" checked><i></i></label></section><section class="panel session-panel"><div class="panel-heading"><div><span class="eyebrow">TODAY</span><h2>专注记录</h2></div><strong class="session-total" id="focusTodayTotal">0 分钟</strong></div><div id="focusSessions" class="session-list"></div></section></aside></div>
+        </section>
+
+        <section class="view" id="reviewView">
+          <div class="page-intro"><div><span class="eyebrow">NOTICE YOUR PROGRESS</span><h2>停一下，看看走过的路</h2><p>复盘不是打分，只是更了解自己。</p></div></div>
+          <div class="review-tabs"><button class="review-tab active" data-period="day">每日复盘</button><button class="review-tab" data-period="week">每周复盘</button></div>
+          <div class="review-layout"><section class="panel review-form-panel"><div class="review-date-row"><div><span class="eyebrow" id="reviewPeriodLabel">DAILY CHECK-IN</span><h2 id="reviewTitle">今天过得怎么样？</h2></div><input id="reviewDate" type="date" aria-label="复盘日期"></div><div class="review-stats" id="reviewStats"></div><form id="reviewForm" novalidate><label for="reviewWins">今天 / 本周，什么事情有一点进展？</label><textarea id="reviewWins" rows="3" placeholder="哪怕很小，也值得记下来"></textarea><label for="reviewBlockers">有什么让你分心或卡住的地方？</label><textarea id="reviewBlockers" rows="3" placeholder="不需要责怪自己，先看见它"></textarea><label for="reviewNext">接下来想尝试什么？</label><textarea id="reviewNext" rows="3" placeholder="写一个温和、具体的小调整"></textarea><button class="button button-primary" type="submit">保存复盘 <span>→</span></button><span class="form-message" id="reviewMessage" role="status"></span></form></section><aside class="panel past-reviews"><div class="panel-heading"><div><span class="eyebrow">LOOKING BACK</span><h2>最近的复盘</h2></div></div><div id="reviewHistory"></div></aside></div>
+        </section>
+      </div>
+      <footer class="mobile-footer"><span class="local-dot"></span>你的学习记录仅保存在此浏览器</footer>
+    </main>
+  </div>
+
+  <dialog id="goalDialog" class="form-dialog"><form id="goalForm" novalidate><div class="dialog-heading"><div><span class="eyebrow">START WITH A DIRECTION</span><h2 id="goalDialogTitle">新建目标</h2></div><button type="button" class="dialog-close" data-close="goalDialog" aria-label="关闭">×</button></div><label for="goalTitle">目标名称 <span class="required">*</span></label><input id="goalTitle" maxlength="100" placeholder="例如：完成高数期末复习" required><label for="goalLevel">目标周期</label><select id="goalLevel"><option value="semester">学期目标</option><option value="month">月份目标</option><option value="week">周目标</option></select><label for="goalQuadrant">轻重缓急</label><select id="goalQuadrant"><option value="q1">重要且紧急</option><option value="q2" selected>重要不紧急</option><option value="q3">不重要但紧急</option><option value="q4">不重要且不紧急</option></select><label for="goalDue">目标日期（可选）</label><input id="goalDue" type="date"><p class="form-error" id="goalError" role="alert"></p><button class="button button-primary full-width" type="submit">保存目标</button></form></dialog>
+  <dialog id="taskDialog" class="form-dialog"><form id="taskForm" novalidate><div class="dialog-heading"><div><span class="eyebrow">ONE THING AT A TIME</span><h2 id="taskDialogTitle">添加任务</h2></div><button type="button" class="dialog-close" data-close="taskDialog" aria-label="关闭">×</button></div><label for="taskTitle">任务名称 <span class="required">*</span></label><input id="taskTitle" maxlength="120" placeholder="例如：复习第三章积分" required><label for="taskGoal">关联目标（可选）</label><select id="taskGoal"><option value="">暂不关联</option></select><label for="taskDate">安排日期</label><input id="taskDate" type="date" required><div class="form-row"><div><label for="taskMinutes">计划时长</label><div class="input-with-suffix"><input id="taskMinutes" type="number" min="0" max="1440" step="5" value="30"><span>分钟</span></div></div><div><label for="taskQuadrant">优先级</label><select id="taskQuadrant"><option value="q1">重要且紧急</option><option value="q2" selected>重要不紧急</option><option value="q3">不重要但紧急</option><option value="q4">不重要且不紧急</option></select></div></div><p class="form-error" id="taskError" role="alert"></p><button class="button button-primary full-width" type="submit">保存任务</button></form></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
